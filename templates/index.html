@@ -1,0 +1,113 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+{% include "header.html" %}
+
+<body>
+<div class="container text-center">
+    <h1 class="title"><i class="fas fa-palette"></i> Image Color Extract <i class="fas fa-palette"></i></h1>
+    <h2 class="subtitle">Use demo for test and upload your own image.</h2>
+    <div class="btns">
+    </div>
+    <div class="container">
+        <div class="docs-inner">
+            <div class="block">
+                {% if not submit: %}
+                <img src="{{ url_for('static', filename='images/sample-image.jpg') }}" alt="sample image">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Color Code</th>
+                        <th>Percentage</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="background-color:#f0a800"></td>
+                        <td>#f0a800</td>
+                        <td>0.229702</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#606030"></td>
+                        <td>#606030</td>
+                        <td>0.175060</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#d87800"></td>
+                        <td>#d87800</td>
+                        <td>0.150476</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#484818"></td>
+                        <td>#484818</td>
+                        <td>0.100952</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#901818"></td>
+                        <td>#901818</td>
+                        <td>0.076726</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#301818"></td>
+                        <td>#301818</td>
+                        <td>0.059643</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#787848"></td>
+                        <td>#787848</td>
+                        <td>0.045893</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#c03018"></td>
+                        <td>#c03018</td>
+                        <td>0.030536</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#d86018"></td>
+                        <td>#d86018</td>
+                        <td>0.027500</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#181800"></td>
+                        <td>#181800</td>
+                        <td>0.023214</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <form method="post" enctype="multipart/form-data">
+                    {{ form.csrf_token }}
+                    {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+                </form>
+            </div>
+        </div>
+        {% else: %}
+        <img src="{{ image_directory }}" alt="image">
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Color</th>
+                <th>Color Code</th>
+                <th>Percentage</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for hex, percent in result %}
+            <tr>
+                <td style="background-color:{{ hex }}"></td>
+                <td>{{ hex }}</td>
+                <td>{{ percent }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <form method="post" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+        </form>
+    </div>
+</div>
+{% endif %}
+{% include "footer.html" %}
+{% endblock %}
