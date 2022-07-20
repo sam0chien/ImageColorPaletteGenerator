@@ -13,7 +13,7 @@
         <div class="docs-inner">
             <div class="block mb-5">
                 {% if not submit: %}
-                <img src="{{ url_for('static', filename='images/sample-image.jpg') }}" alt="sample image">
+                <img class="img-fluid" src="{{ url_for('static', filename='images/sample-image.jpg') }}" alt="sample image">
                 <table class="table table-striped table-hover">
                     <thead>
                     <tr>
@@ -82,7 +82,7 @@
             </div>
         </div>
         {% else: %}
-        <img src="{{ image_directory }}" alt="image">
+        <img class="img-fluid" src="{{ image_directory }}" alt="image">
 
         <table class="table table-striped table-hover">
             <thead>
