@@ -15,13 +15,10 @@ def color_extractor(number, picture):
     counter = Counter(clt.labels_)  # count how many pixels per cluster
     percent = {}
     for i in counter:
-        percent[i] = np.round(counter[i] / n_pixels, 2)
-
-    # for logging purposes
-    # print(percent)
-    # print(clt.cluster_centers_)
+        percent[i] = format(np.round(counter[i] / n_pixels, 4), '.4f')
 
     for n in range(len(percent)):
         percent['#%02x%02x%02x' % tuple(clt.cluster_centers_[n, :].astype(int))] = percent.pop(n)
         percent = dict(sorted(percent.items(), key=lambda item: item[1], reverse=True))
+
     return percent.items()
