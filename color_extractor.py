@@ -5,7 +5,6 @@ from collections import Counter
 
 
 def color_extractor(number, picture):
-
     image = cv.imread(picture)
     image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
 
